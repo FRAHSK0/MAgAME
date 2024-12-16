@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea vs Auttistici</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+        }
+        #gameCanvas {
+            display: block;
+            margin: auto;
+            background-color: #111;
+            border: 2px solid white;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+        }
+        #victoryMessage {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border: 2px solid white;
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: 0</div>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="victoryMessage">🎉 Complimenti, hai vinto! 🎉</div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const victoryMessage = document.getElementById('victoryMessage');
+
+        // Game variables
+        let score = 0;
+        let gameRunning = true;
+        const winningScore = 50; // Punteggio per vincere
+
+        // Player (Andrea)
+        const player = {
+            x: 400,
+            y: 300,
+            size: 20,
+            speed: 5,
+            color: 'yellow'
+        };
+
+        // Enemies (Auttistici)
+        const enemies = [];
+        for (let i = 0; i < 5; i++) {
+            enemies.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: 20,
+                speedX: (Math.random() - 0.5) * 4,
+                speedY: (Math.random() - 0.5) * 4,
+                color: 'green'
+            });
+        }
+
+        // Controls
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false
+        };
+
+        window.addEventListener('keydown', (e) => {
+            if (keys.hasOwnProperty(e.key)) keys[e.key] = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keys.hasOwnProperty(e.key)) keys[e.key] = false;
+        });
+
+        // Update player position
+        function movePlayer() {
+            if (keys.ArrowUp && player.y > 0) player.y -= player.speed;
+            if (keys.ArrowDown && player.y < canvas.height - player.size) player.y += player.speed;
+            if (keys.ArrowLeft && player.x > 0) player.x -= player.speed;
+            if (keys.ArrowRight && player.x < canvas.width - player.size) player.x += player.speed;
+        }
+
+        // Update enemies
+        function moveEnemies() {
+            enemies.forEach(enemy => {
+                enemy.x += enemy.speedX;
+                enemy.y += enemy.speedY;
+
+                // Bounce off walls
+                if (enemy.x <= 0 || enemy.x >= canvas.width - enemy.size) enemy.speedX *= -1;
+                if (enemy.y <= 0 || enemy.y >= canvas.height - enemy.size) enemy.speedY *= -1;
+            });
+        }
+
+        // Check for collisions
+        function checkCollisions() {
+            enemies.forEach(enemy => {
+                const distX = Math.abs(player.x - enemy.x);
+                const distY = Math.abs(player.y - enemy.y);
+
+                if (distX < player.size && distY < player.size) {
+                    gameRunning = false;
+                    alert(`Game Over! Final Score: ${score}`);
+                    window.location.reload(); // Ricarica il gioco
+                }
+            });
+        }
+
+        // Draw player
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+        }
+
+        // Draw enemies
+        function drawEnemies() {
+            enemies.forEach(enemy => {
+                ctx.fillStyle = enemy.color;
+                ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+            });
+        }
+
+        // Update score
+        function updateScore() {
+            score++;
+            document.getElementById('score').textContent = `Score: ${score}`;
+            if (score >= winningScore) {
+                gameRunning = false;
+                victoryMessage.style.display = 'block'; // Mostra il messaggio di vittoria
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (!gameRunning) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            movePlayer();
+            moveEnemies();
+            checkCollisions();
+            drawPlayer();
+            drawEnemies();
+            updateScore();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
