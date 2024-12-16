@@ -65,7 +65,7 @@
 
         // Enemies (Auttistici)
         const enemies = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 10; i++) {
             enemies.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -126,19 +126,32 @@
             });
         }
 
-        // Draw player
-        function drawPlayer() {
-            ctx.fillStyle = player.color;
-            ctx.fillRect(player.x, player.y, player.size, player.size);
-        }
+        // Disegna il giocatore (Andrea) con il suo nome sopra
+function drawPlayer() {
+    ctx.fillStyle = player.color;
+    ctx.fillRect(player.x, player.y, player.size, player.size);
 
-        // Draw enemies
-        function drawEnemies() {
-            enemies.forEach(enemy => {
-                ctx.fillStyle = enemy.color;
-                ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
-            });
-        }
+    // Disegna il nome "Andrea" sopra il giocatore
+    ctx.fillStyle = 'white';
+    ctx.font = '16px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Andrea', player.x + player.size / 2, player.y - 5);
+}
+
+// Disegna i nemici (Autistici) con il testo "Autistico" sopra
+function drawEnemies() {
+    enemies.forEach(enemy => {
+        ctx.fillStyle = enemy.color;
+        ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+
+        // Disegna il testo "Autistico" sopra ogni nemico
+        ctx.fillStyle = 'white';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Autistico', enemy.x + enemy.size / 2, enemy.y - 5);
+    });
+}
+
 
         // Update score
         function updateScore() {
