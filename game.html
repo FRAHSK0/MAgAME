@@ -42,7 +42,7 @@
 <body>
     <div id="score">Score: 0</div>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <div id="victoryMessage">🎉 Complimenti, hai vinto! la parola del giorno è sapienza 🎉</div>
+    <div id="victoryMessage">🎉 Brava Mati, hai salvato Andrea la parola del giorno è sapienza 🎉</div>
 
     <script>
         const canvas = document.getElementById('gameCanvas');
@@ -65,7 +65,7 @@
 
         // Enemies (Auttistici)
         const enemies = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 15; i++) {
             enemies.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
