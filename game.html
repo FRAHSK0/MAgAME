@@ -120,7 +120,7 @@
 
                 if (distX < player.size && distY < player.size) {
                     gameRunning = false;
-                    alert(`POVERO ANDRE È STATO PRESO DAGLI AUTISTICI  ${score}`);
+                    alert(`POVERO ANDRE È STATO PRESO DAGLI AUTISTICI A ${score} PUNTI DAI CHE A MILLE MANCA POCO`);
                     window.location.reload(); // Ricarica il gioco
                 }
             });
@@ -156,7 +156,7 @@ function drawEnemies() {
         // Update score
         function updateScore() {
             score++;
-            document.getElementById('score').textContent = `Score: ${score}`;
+            document.getElementById('score').textContent = `PUNTI: ${score}`;
             if (score >= winningScore) {
                 gameRunning = false;
                 victoryMessage.style.display = 'block'; // Mostra il messaggio di vittoria
