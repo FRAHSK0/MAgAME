@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Il Crucimati</title>
+    <title>Il Crucimati</title>
     <link rel="icon" href="favicon-16x16.png" type="image/png">
     <style>
         body {
@@ -27,6 +27,38 @@
             width: 1000px;
             height: 800px;
         }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        label {
+            font-size: 16px;
+            color: #333;
+        }
+        input[type="number"] {
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -36,5 +68,30 @@
         src="https://crosswordlabs.com/embed/il-crucimati" 
         frameborder="0">
     </iframe>
+
+    <form id="vowelForm">
+        <label for="vowelCount">Scrivi il numero di vocali nel cruciverba:</label><br>
+        <input type="number" id="vowelCount" name="vowelCount" required>
+        <br>
+        <button type="submit">Invia</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        const EXPECTED_VOWEL_COUNT = 20; // Numero fisso di vocali attese
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Impedisce il ricaricamento della pagina
+
+    const vowelCount = parseInt(document.getElementById('vowelCount').value, 10);
+    if (vowelCount === EXPECTED_VOWEL_COUNT) {
+        resultDiv.textContent = `La parola del giorno è antropologicamente.`;
+    } else {
+        resultDiv.textContent = `Numero di vocali errato. Riprova!`;
+    }
+});
+
+    </script>
 </body>
 </html>
