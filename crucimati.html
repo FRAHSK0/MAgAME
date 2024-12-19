@@ -79,19 +79,20 @@
     <div id="result"></div>
 
     <script>
+        const form = document.getElementById('vowelForm');
+        const resultDiv = document.getElementById('result');
         const EXPECTED_VOWEL_COUNT = 20; // Numero fisso di vocali attese
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Impedisce il ricaricamento della pagina
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impedisce il ricaricamento della pagina
 
-    const vowelCount = parseInt(document.getElementById('vowelCount').value, 10);
-    if (vowelCount === EXPECTED_VOWEL_COUNT) {
-        resultDiv.textContent = `La parola del giorno è antropologicamente.`;
-    } else {
-        resultDiv.textContent = `Numero di vocali errato. Riprova!`;
-    }
-});
-
+            const vowelCount = parseInt(document.getElementById('vowelCount').value, 10);
+            if (vowelCount === EXPECTED_VOWEL_COUNT) {
+                resultDiv.textContent = `La parola del giorno è antropologicamente.`;
+            } else {
+                resultDiv.textContent = `Numero di vocali errato. Riprova!`;
+            }
+        });
     </script>
 </body>
 </html>
