@@ -73,8 +73,8 @@
 
   <!-- Input per la funzione -->
   <div class="label-box">
-    <label for="functionInput">Inserisci una funzione (ad esempio: x*x)</label>
-    <input type="text" id="functionInput" placeholder="y = x^2" oninput="aggiornaGrafico()">
+    <label for="functionInput">Inserisci una funzione (ad esempio: x^(2/3) + 0.9*sin(100*x)*(sqrt(3-x^2)))</label>
+    <input type="text" id="functionInput" placeholder="y = x^(2/3) + 0.9*sin(100*x)*(sqrt(3-x^2))" oninput="aggiornaGrafico()">
   </div>
 
   <!-- Canvas per il grafico -->
@@ -114,27 +114,31 @@
       const funzioneInput = document.getElementById('functionInput').value.trim();
 
       // Funzione di default (y = x^2) se l'input è vuoto
-      let funzione = new Function('x', 'return x*x;');
+      let funzione = function(x) {
+        return Math.pow(x, 2);  // Default: y = x^2
+      };
       
       try {
-        // Proviamo a creare una funzione dinamica dall'input dell'utente
+        // Creazione della funzione dinamica in base all'input dell'utente
         if (funzioneInput) {
-          // La funzione sarà interpretata come una stringa che usa 'x' come variabile
+          // Crea una funzione utilizzando l'input dell'utente
           funzione = new Function('x', 'return ' + funzioneInput + ';');
         }
       } catch (error) {
-        // In caso di errore, impostiamo la funzione a x^2
         console.error('Errore nella funzione:', error);
       }
 
       const xValues = [];
       const yValues = [];
 
-      // Creiamo i valori per x da -10 a 10
-      for (let x = -10; x <= 10; x += 0.1) {
+      // Creiamo i valori per x tra -sqrt(3) e sqrt(3) per evitare problemi con sqrt(3 - x^2)
+      const maxX = Math.sqrt(3);
+      for (let x = -maxX; x <= maxX; x += 0.1) {
         const y = funzione(x); // Calcoliamo il valore di y
-        xValues.push(x);
-        yValues.push(y);
+        if (!isNaN(y)) { // Evita valori NaN derivanti da errori nei calcoli
+          xValues.push(x);
+          yValues.push(y);
+        }
       }
 
       // Distruggiamo il grafico precedente (se esiste) prima di crearne uno nuovo
