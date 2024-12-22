@@ -113,15 +113,15 @@
       const ctx = document.getElementById('graph').getContext('2d');
       const funzioneInput = document.getElementById('functionInput').value.trim();
 
-      // Funzione di default (y = x^2) se l'input è vuoto
+      // Funzione di default (cuore)
       let funzione = function(x) {
-        return Math.pow(x, 2);  // Default: y = x^2
+        const y = 3 * Math.pow(x, 2/3) + 0.9 * Math.sin(100 * x) * Math.sqrt(3 - Math.pow(x, 2));
+        return y;
       };
       
       try {
-        // Creazione della funzione dinamica in base all'input dell'utente
+        // Se l'utente ha inserito una funzione, creiamo una funzione dinamica
         if (funzioneInput) {
-          // Crea una funzione utilizzando l'input dell'utente
           funzione = new Function('x', 'return ' + funzioneInput + ';');
         }
       } catch (error) {
@@ -133,7 +133,7 @@
 
       // Creiamo i valori per x tra -sqrt(3) e sqrt(3) per evitare problemi con sqrt(3 - x^2)
       const maxX = Math.sqrt(3);
-      for (let x = -maxX; x <= maxX; x += 0.1) {
+      for (let x = -maxX; x <= maxX; x += 0.01) {
         const y = funzione(x); // Calcoliamo il valore di y
         if (!isNaN(y)) { // Evita valori NaN derivanti da errori nei calcoli
           xValues.push(x);
