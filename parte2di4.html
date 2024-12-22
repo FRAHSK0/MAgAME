@@ -41,6 +41,12 @@
       font-size: 24px;
       font-weight: bold;
     }
+    .word-of-the-day {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: blue;
+    }
   </style>
 </head>
 <body>
@@ -71,7 +77,14 @@
     <iframe src="https://www.geogebra.org/classic/xyz123" width="1000" height="800" frameborder="0" allowfullscreen></iframe>
   </div>
 
+  <!-- Messaggio "Parola del giorno" -->
+  <div id="word-of-the-day" class="word-of-the-day"></div>
+
   <script>
+    let parola1Corretta = false;
+    let parola2Corretta = false;
+    let parola3Corretta = false;
+
     // Funzione che verifica la parola inserita rispetto alla parola corretta
     function verificaParola(id, parolaCorretta) {
       const input = document.getElementById(`input${id}`).value.trim();
@@ -81,10 +94,13 @@
         // Messaggi specifici per ogni parola corretta
         if (id === 1) {
           output.textContent = "x^2 / 3";
+          parola1Corretta = true;
         } else if (id === 2) {
           output.textContent = "0.9 * Math.sin(100 * x)";
+          parola2Corretta = true;
         } else if (id === 3) {
           output.textContent = "sqrt(3 - x^2)";
+          parola3Corretta = true;
         }
         output.className = "output success";
       } else if (input === "") {
@@ -93,9 +109,19 @@
       } else {
         output.textContent = "Mati, riprova";
         output.className = "output error";
+        // Se la parola è errata, assicuriamoci che l'utente non veda il messaggio "Parola del giorno"
+        if (id === 1) parola1Corretta = false;
+        if (id === 2) parola2Corretta = false;
+        if (id === 3) parola3Corretta = false;
+      }
+
+      // Verifica se tutte le parole sono corrette
+      if (parola1Corretta && parola2Corretta && parola3Corretta) {
+        document.getElementById("word-of-the-day").textContent = "La parola del giorno è TUONO";
+      } else {
+        document.getElementById("word-of-the-day").textContent = "";
       }
     }
   </script>
 </body>
 </html>
-
