@@ -41,17 +41,11 @@
       font-size: 24px;
       font-weight: bold;
     }
-    canvas {
-      margin-top: 30px;
-      border: 1px solid black;
-    }
   </style>
-  <!-- Aggiungere Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <h1>ORA CI DIVERTIAMO</h1>
-  <div class="expression">y = parola1 + parola2 * parola3</div> <!-- Scritta grande una sola volta -->
+  <div class="expression">y = parola1 + parola2 * parola3</div>
   
   <div class="container">
     <div class="label-box">
@@ -71,16 +65,10 @@
     </div>
   </div>
 
-  <!-- Input per la funzione -->
+  <!-- GeoGebra Classico Incorporato -->
   <div class="label-box">
-    <label for="functionInput">Inserisci una funzione (ad esempio: x^(2/3) + 0.9*sin(100*x)*(sqrt(3-x^2)))</label>
-    <input type="text" id="functionInput" placeholder="y = x^(2/3) + 0.9*sin(100*x)*(sqrt(3-x^2))" oninput="aggiornaGrafico()">
-  </div>
-
-  <!-- Canvas per il grafico -->
-  <div class="label-box">
-    <label for="graph">Grafico Funzione</label>
-    <canvas id="graph" width="400" height="400"></canvas>
+    <label for="geogebra">Grafico GeoGebra Classico</label>
+    <iframe src="https://www.geogebra.org/classic/xyz123" width="800" height="600" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <script>
@@ -107,92 +95,7 @@
         output.className = "output error";
       }
     }
-
-    // Funzione per aggiornare il grafico con la funzione inserita
-    function aggiornaGrafico() {
-      const ctx = document.getElementById('graph').getContext('2d');
-      const funzioneInput = document.getElementById('functionInput').value.trim();
-
-      // Funzione di default (cuore)
-      let funzione = function(x) {
-        const y = 3 * Math.pow(x, 2/3) + 0.9 * Math.sin(100 * x) * Math.sqrt(3 - Math.pow(x, 2));
-        return y;
-      };
-      
-      try {
-        // Se l'utente ha inserito una funzione, creiamo una funzione dinamica
-        if (funzioneInput) {
-          funzione = new Function('x', 'return ' + funzioneInput + ';');
-        }
-      } catch (error) {
-        console.error('Errore nella funzione:', error);
-      }
-
-      const xValues = [];
-      const yValues = [];
-
-      // Creiamo i valori per x tra -sqrt(3) e sqrt(3) per evitare problemi con sqrt(3 - x^2)
-      const maxX = 3;  // Aumentato per coprire tutti i quadranti
-
-      // Incremento più grande per ottenere un grafico meno definito
-      for (let x = -maxX; x <= maxX; x += 0.1) {  // Cambia 0.01 a 0.1 per risoluzione più bassa
-        const y = funzione(x); // Calcoliamo il valore di y
-        if (!isNaN(y)) { // Evita valori NaN derivanti da errori nei calcoli
-          xValues.push(x);
-          yValues.push(y);
-        }
-      }
-
-      // Distruggiamo il grafico precedente (se esiste) prima di crearne uno nuovo
-      if (window.grafico) {
-        window.grafico.destroy();
-      }
-
-      // Crea il grafico
-      window.grafico = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: xValues,
-          datasets: [{
-            label: 'Funzione: ' + funzioneInput,
-            data: yValues,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2,
-            fill: false
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            x: {
-              min: -3, // Imposta il minimo per l'asse X
-              max: 3,  // Imposta il massimo per l'asse X
-              title: {
-                display: true,
-                text: 'x'
-              },
-              grid: {
-                color: 'rgba(0,0,0,0.1)', // Linee di griglia per x
-              }
-            },
-            y: {
-              min: -3,  // Imposta il minimo per l'asse Y
-              max: 3,   // Imposta il massimo per l'asse Y
-              title: {
-                display: true,
-                text: 'y'
-              },
-              grid: {
-                color: 'rgba(0,0,0,0.1)', // Linee di griglia per y
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // Chiamata per disegnare il grafico quando la pagina è pronta
-    window.onload = aggiornaGrafico;
   </script>
 </body>
 </html>
+
