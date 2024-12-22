@@ -132,8 +132,10 @@
       const yValues = [];
 
       // Creiamo i valori per x tra -sqrt(3) e sqrt(3) per evitare problemi con sqrt(3 - x^2)
-      const maxX = Math.sqrt(3);
-      for (let x = -maxX; x <= maxX; x += 0.01) {
+      const maxX = 3;  // Aumentato per coprire tutti i quadranti
+
+      // Incremento più grande per ottenere un grafico meno definito
+      for (let x = -maxX; x <= maxX; x += 0.1) {  // Cambia 0.01 a 0.1 per risoluzione più bassa
         const y = funzione(x); // Calcoliamo il valore di y
         if (!isNaN(y)) { // Evita valori NaN derivanti da errori nei calcoli
           xValues.push(x);
@@ -160,17 +162,28 @@
           }]
         },
         options: {
+          responsive: true,
           scales: {
             x: {
+              min: -3, // Imposta il minimo per l'asse X
+              max: 3,  // Imposta il massimo per l'asse X
               title: {
                 display: true,
                 text: 'x'
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.1)', // Linee di griglia per x
               }
             },
             y: {
+              min: -3,  // Imposta il minimo per l'asse Y
+              max: 3,   // Imposta il massimo per l'asse Y
               title: {
                 display: true,
                 text: 'y'
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.1)', // Linee di griglia per y
               }
             }
           }
