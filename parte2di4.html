@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> VI0LENZA </title>
-    <link rel="icon" href="favicon-16x16.png" type="image/png">
+  <title>VI0LENZA</title>
+  <link rel="icon" href="favicon-16x16.png" type="image/png">
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 20px;
+      background-color: #000;
+      color: #fff;
     }
     .container {
       display: flex;
@@ -25,6 +27,9 @@
     input {
       padding: 5px;
       margin-top: 5px;
+      border: 1px solid #555;
+      background-color: #222;
+      color: #fff;
     }
     .output {
       margin-top: 10px;
@@ -32,28 +37,29 @@
       font-weight: bold;
     }
     .error {
-      color: red;
+      color: #f00;
     }
     .success {
-      color: green;
+      color: #0f0;
     }
     .expression {
       margin-top: 20px;
       font-size: 24px;
       font-weight: bold;
+      color: #fff;
     }
     .word-of-the-day {
       margin-top: 20px;
       font-size: 24px;
       font-weight: bold;
-      color: blue;
+      color: #1e90ff;
     }
   </style>
 </head>
 <body>
   <h1>ORA CI DIVERTIAMO</h1>
   <div class="expression">y = parola1 + parola2 * parola3</div>
-  
+
   <div class="container">
     <div class="label-box">
       <label for="input1">Parola 1</label>
@@ -74,7 +80,7 @@
 
   <!-- GeoGebra Classico Incorporato -->
   <div class="label-box">
-    <label for="geogebra"> Usa la funzione grafico di Geogebra (LA PAROLA DEL GIORNO è in basso alla pagina)</label>
+    <label for="geogebra">Usa la funzione grafico di Geogebra (LA PAROLA DEL GIORNO è in basso alla pagina)</label>
     <iframe src="https://www.geogebra.org/classic/xyz123" width="1000" height="800" frameborder="0" allowfullscreen></iframe>
   </div>
 
