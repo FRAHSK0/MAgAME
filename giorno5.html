@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numeri-numeri</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+        input[type="number"] {
+            padding: 0.5em;
+            font-size: 1em;
+            margin-bottom: 1em;
+        }
+        button {
+            padding: 0.5em 1em;
+            font-size: 1em;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: gray;
+            color: white;
+        }
+        #result {
+            margin-top: 1em;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ecco numeri e date che fanno pensare, (segui l'operazione e ottieni l'ultimo numero daje ci sei quasi)</h1>
+    <p>L'anno di uscita di "dove andiamo a ballare stasera?"-anno del suffragio femminile svizzero +numero di album in studio dei DIRE STRAITS</p>
+    <input type="number" id="numberInput" placeholder="Scrivi un numero">
+    <button onclick="checkNumber()">Verifica</button>
+    <div id="result"></div>
+
+    <script>
+        function checkNumber() {
+            const correctNumber = 23; // Modifica questo numero con quello corretto
+            const userInput = parseInt(document.getElementById('numberInput').value);
+            const resultDiv = document.getElementById('result');
+
+            if (userInput === correctNumber) {
+                resultDiv.textContent = "L'ultima parola è Ambra.";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.textContent = "RIPROVA MATI";
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
