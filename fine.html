@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifica Parola</title>
+    <title>LAFINE</title>
+    <link rel="icon" href="favicon-16x16.png" type="image/png">
     <style>
         body {
             background-color: black;
@@ -60,12 +61,17 @@
 <body>
     <h1>La città la trovi con la prima lettera di ogni parola del giorno</h1>
     <ul>
-        <li>PAROLA 1-</li>
-        <li>PAROLA 2-Via Archet</li>
-        <li>PAROLA 3-Rotonda su viale Federico Chabod</li>
-        <li>PAROLA 4-via Bonifacio festaz 95-43 +via Bramafam+Rue Monseigneur Jean-Joconde Stévenin+via Trottechien</li>
+        <li>lettera 1-Rue Xavier de mestre +via julien Charrey+via Porta Pretoria</li>
+        <li>lettera 2-Via Archet</li>
+        <li>lettera 3-Rotonda su viale Federico Chabod</li>
+        <li>lettera 4-via Bonifacio festaz 95-43 +via Bramafam+Rue Monseigneur Jean-Joconde Stévenin+via Trottechien</li>
+        <li>lettera 5-Strada Cappucciini dal 10 al 2 +rue du petit seminaire+strada statale 26 della val d'aosta dal 14 al 19</li>
+        <li>lettera 6-via Capitano Chamonin 26-10+viale Èmilie Lexert 3-12+via generale Luigi Chatrian +via Darbelley</li>
+        <li>lettera 7-via Brocherel/li>
+        <li>lettera 8-Rotonda su strada Saumont</li>
+        
     </ul>
-    <p>Inserisci la parola corretta per ottenere il link:</p>
+    <p>Inserisci la/e parola/e corretta/e per ottenere il link:</p>
     <input type="text" id="textInput" placeholder="Scrivi qui la parola">
     <button onclick="checkWord()">Verifica</button>
     <div id="result"></div>
@@ -77,7 +83,7 @@
             const resultDiv = document.getElementById('result');
 
             if (userInput.toLowerCase() === correctWord.toLowerCase()) {
-                resultDiv.innerHTML = '<a href="https://example.com" target="_blank">Vai al link</a>';
+                resultDiv.innerHTML = '<a href="https://drive.google.com/drive/folders/1o-YAtzrJ_OQI9eOHqZeGAd1iGsLf47gA?usp=drive_link" target="_blank">Vai al link</a>';
                 resultDiv.style.color = "green";
             } else {
                 resultDiv.textContent = "RIPROVA";
